@@ -19,6 +19,18 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
+\definecolor{linkblue}{HTML}{1F5FBF}
+\newcommand{\supplementlinkbox}{%
+\par\smallskip\noindent
+\begingroup
+\setlength{\fboxsep}{3pt}%
+\fcolorbox{linkblue}{white}{%
+\begin{minipage}{0.96\linewidth}
+\centering
+\textbf{Interactive supplement:}
+\url{https://kaigeliang.github.io/random-walks-ai-report/}
+\end{minipage}}%
+\endgroup\par\smallskip}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -56,9 +68,8 @@ random-walk graph embeddings such as DeepWalk and node2vec, Markov chain
 Monte Carlo (MCMC) inference, and exploration in reinforcement learning.
 The report also documents how we prepared the class demonstration: each
 formula is paired with a visual simulation or AI example so that the
-concept is both mathematically precise and easy to explain. The
-accompanying GitHub Pages supplement is available at
-\url{https://kaigeliang.github.io/random-walks-ai-report/}.
+concept is both mathematically precise and easy to explain.
+\supplementlinkbox
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -87,11 +98,12 @@ limit theorem (CLT).
 
 Historically the random walk has a remarkable lineage. The term was
 coined by Karl Pearson in a 1905 letter to \emph{Nature} in which he asked
-how far a drunk man would have wandered after $n$ steps. Five years
+how far a drunk man would have wandered after $n$ steps~\cite{pearson1905}.
+Five years
 earlier, Louis Bachelier had used essentially the same model to study
-fluctuations on the Paris stock exchange in his Sorbonne thesis, and in
+fluctuations on the Paris stock exchange in his Sorbonne thesis~\cite{bachelier1900}, and in
 1905 Albert Einstein independently invoked it to predict the motion of
-particles suspended in a fluid~--- a result that Jean Perrin later turned
+particles suspended in a fluid~\cite{einstein1905}~--- a result that Jean Perrin later turned
 into experimental evidence for the existence of atoms. The same object
 underpinned Andrey Markov's analysis of letter dependencies in
 \emph{Eugene Onegin}, and reappeared in George P\'{o}lya's celebrated 1921
@@ -350,7 +362,8 @@ long run.
 \includegraphics[width=0.85\columnwidth]{fig_pagerank.pdf}
 \caption{Toy web graph with five pages. The stationary distribution of
 the random-surfer Markov chain assigns the highest probability mass to
-the most ``trafficked'' node (gold), regardless of its raw in-degree.}
+page B (gold). The labels $in=k$ report raw in-degree, showing that
+PageRank depends on random-walk traffic rather than in-degree alone.}
 \label{fig:pagerank}
 \end{figure}
 
@@ -384,8 +397,16 @@ small Gaussian increments,
 x_{t}=\sqrt{1-\beta_{t}}\,x_{t-1}+\sqrt{\beta_{t}}\,\epsilon_{t},
 \quad \epsilon_{t}\sim\mathcal{N}(0,I),
 \end{equation}
-until $x_{T}$ is indistinguishable from pure noise. The continuous-time
-limit is exactly the Brownian motion described in
+until $x_{T}$ is indistinguishable from pure noise. Equivalently,
+iterating the walk gives
+\begin{equation}
+x_{t}=\sqrt{\bar{\alpha}_{t}}\,x_{0}
++\sqrt{1-\bar{\alpha}_{t}}\,\epsilon,\qquad
+\bar{\alpha}_{t}=\prod_{s\leq t}(1-\beta_{s}),
+\end{equation}
+so the accumulated variance $1-\bar{\alpha}_{t}$ is the DDPM analogue of
+the diffusive growth in Eq.~\eqref{eq:VarSn}. The continuous-time
+limit is Brownian motion, as described in
 Section~\ref{sec:1d}~\cite{song2021scorebased}.
 Figure~\ref{fig:diffusion} traces a one-dimensional toy example: a
 clearly bimodal data distribution at $t=0$ is gradually smeared by
@@ -415,6 +436,14 @@ in network analysis. DeepWalk~\cite{perozzi2014deepwalk} treats short
 random walks on a graph as ``sentences'' and feeds them to a Skip-gram
 language model: nodes that co-occur on the same walk receive similar
 embeddings (Fig.~\ref{fig:deepwalk}).
+In compact form, the training objective maximises
+\begin{equation}
+\sum_{v_i\in \mathrm{walk}}\sum_{v_j\in N(v_i)}
+\log p(v_j\mid v_i),
+\end{equation}
+where $N(v_i)$ is the context window around $v_i$ along the sampled
+walk. Thus the embedding is trained not from arbitrary graph distance,
+but from the local neighbourhoods visited by the random walker.
 
 \begin{figure}[!htbp]
 \centering
@@ -527,9 +556,11 @@ graph embeddings, MCMC inference, and exploration in reinforcement
 learning. The lesson of the report is that elementary probability,
 properly understood, scales: the same coin flip we analysed in
 Section~\ref{sec:1d} powers the algorithms behind today's most
-sophisticated AI systems.
+sophisticated AI systems. Natural next directions include non-stationary
+step distributions, heavy-tailed walks with rare large jumps, and
+quantum-walk variants that replace classical transition probabilities by
+interference amplitudes.
 
-\clearpage
 \bibliographystyle{IEEEtran}
 \begin{thebibliography}{99}
 \scriptsize
@@ -548,6 +579,21 @@ Cambridge, U.K.: Cambridge Univ.\ Press, 2010.
 \bibitem{durrett2019probability}
 R.~Durrett, \emph{Probability: Theory and Examples}, 5th~ed.\ \ Cambridge,
 U.K.: Cambridge Univ.\ Press, 2019.
+
+\bibitem{bachelier1900}
+L.~Bachelier, ``Th\'{e}orie de la sp\'{e}culation,'' \emph{Annales
+Scientifiques de l'\'{E}cole Normale Sup\'{e}rieure}, vol.~17,
+pp.~21--86, 1900.
+
+\bibitem{pearson1905}
+K.~Pearson, ``The problem of the random walk,'' \emph{Nature}, vol.~72,
+no.~1865, p.~294, 1905.
+
+\bibitem{einstein1905}
+A.~Einstein, ``\"{U}ber die von der molekularkinetischen Theorie der
+W\"{a}rme geforderte Bewegung von in ruhenden Fl\"{u}ssigkeiten
+suspendierten Teilchen,'' \emph{Annalen der Physik}, vol.~17,
+pp.~549--560, 1905.
 
 \bibitem{morters2010brownian}
 P.~M\"{o}rters and Y.~Peres, \emph{Brownian Motion}.\ \ Cambridge, U.K.:
