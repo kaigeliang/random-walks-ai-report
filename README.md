@@ -2,6 +2,8 @@
 
 This folder contains the LaTeX report, the Python figure-generation script, and a GitHub Pages-ready interactive supplement.
 
+Live demo: https://kaigeliang.github.io/random-walks-ai-report/
+
 Main files:
 
 - `conference_101719.tex`: report source
