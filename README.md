@@ -4,12 +4,15 @@ This folder contains the LaTeX report, the Python figure-generation script, and 
 
 Live demo: https://kaigeliang.github.io/random-walks-ai-report/
 
+![Random Walks infographic poster](docs/assets/random-walks-infographic.png)
+
 Main files:
 
 - `conference_101719.tex`: report source
 - `conference_101719.pdf`: compiled report
 - `generate_randomwalk_figures.py`: reproducible Python figures
 - `docs/index.html`: interactive web animation demo
+- `docs/assets/random-walks-infographic.png`: one-page infographic poster
 
 Local preview:
 

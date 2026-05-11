@@ -238,6 +238,65 @@ canvas {
   background: var(--blue);
 }
 
+.poster-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border: 1px solid rgba(22, 133, 117, 0.38);
+  border-radius: 8px;
+  background: #ecf7f4;
+  color: #0f6f62;
+  font-weight: 760;
+  text-decoration: none;
+}
+
+.poster-link:hover {
+  border-color: rgba(22, 133, 117, 0.68);
+}
+
+.poster-section {
+  padding: 34px 26px 46px;
+  border-top: 1px solid var(--line);
+  background: #fffdf7;
+}
+
+.poster-copy {
+  max-width: 920px;
+  margin: 0 auto 18px;
+}
+
+.poster-copy h2 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.poster-copy p:last-child {
+  max-width: 760px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.poster-frame {
+  display: block;
+  max-width: 1180px;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.poster-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 @media (max-width: 860px) {
   .app-shell {
     grid-template-columns: 1fr;
@@ -262,6 +321,10 @@ canvas {
   .stage {
     min-height: 620px;
   }
+
+  .poster-copy h2 {
+    font-size: 24px;
+  }
 }
 
 @media (max-width: 560px) {
@@ -281,5 +344,9 @@ canvas {
 
   .equation {
     text-align: left;
+  }
+
+  .poster-section {
+    padding: 28px 18px 38px;
   }
 }

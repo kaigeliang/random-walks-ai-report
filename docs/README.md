@@ -10,4 +10,7 @@ The page includes five animated examples:
 - random-walk Metropolis sampling
 - epsilon-greedy reinforcement-learning exploration
 
+It also includes `assets/random-walks-infographic.png`, a one-page poster
+summary suitable for presentation or README preview.
+
 To publish it, push the repository to GitHub, open **Settings > Pages**, and set the source to the `docs/` folder.
