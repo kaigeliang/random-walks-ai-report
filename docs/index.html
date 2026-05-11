@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Random Walks in AI</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="side-panel" aria-label="Visualization controls">
+        <div class="brand">
+          <p class="eyebrow">Interactive supplement</p>
+          <h1>Random Walks in AI</h1>
+          <p class="summary">Five animated views of the same Markov idea: move locally, count globally.</p>
+        </div>
+
+        <nav class="tabs" aria-label="AI application demos">
+          <button class="tab is-active" type="button" data-demo="pagerank">PageRank</button>
+          <button class="tab" type="button" data-demo="diffusion">Diffusion</button>
+          <button class="tab" type="button" data-demo="deepwalk">DeepWalk</button>
+          <button class="tab" type="button" data-demo="mcmc">MCMC</button>
+          <button class="tab" type="button" data-demo="rl">RL Explore</button>
+        </nav>
+
+        <section class="control-panel" aria-label="Animation settings">
+          <div class="button-row">
+            <button id="playPause" class="primary" type="button" aria-label="Pause animation">Pause</button>
+            <button id="stepOnce" type="button" aria-label="Advance one step">Step</button>
+            <button id="resetDemo" type="button" aria-label="Reset animation">Reset</button>
+          </div>
+
+          <label class="slider-row" for="speed">
+            <span>Speed</span>
+            <input id="speed" type="range" min="1" max="16" value="5">
+          </label>
+
+          <label class="slider-row" for="parameter">
+            <span id="parameterLabel">Teleport probability</span>
+            <input id="parameter" type="range" min="0" max="100" value="15">
+          </label>
+        </section>
+
+        <section class="metric-panel" aria-label="Current metrics">
+          <div>
+            <span class="metric-label">Step</span>
+            <strong id="metricStep">0</strong>
+          </div>
+          <div>
+            <span class="metric-label" id="metricOneLabel">Current</span>
+            <strong id="metricOne">A</strong>
+          </div>
+          <div>
+            <span class="metric-label" id="metricTwoLabel">Measure</span>
+            <strong id="metricTwo">0.00</strong>
+          </div>
+        </section>
+      </aside>
+
+      <section class="stage" aria-label="Animation stage">
+        <div class="stage-header">
+          <div>
+            <p class="eyebrow" id="demoKicker">Link analysis</p>
+            <h2 id="demoTitle">PageRank random surfer</h2>
+          </div>
+          <p id="demoEquation" class="equation">r = (1 - alpha) A r + alpha e</p>
+        </div>
+
+        <canvas id="scene" width="1200" height="780" aria-label="Animated random walk visualization"></canvas>
+
+        <div class="legend" id="legend" aria-label="Legend"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

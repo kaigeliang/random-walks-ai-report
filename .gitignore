@@ -1,0 +1,21 @@
+# LaTeX build outputs
+*.aux
+*.log
+*.out
+*.toc
+build/
+
+# Local previews and generated inspection artifacts
+.playwright-cli/
+output/
+tmp/
+page-*.jpg
+
+# macOS metadata
+.DS_Store
+
+# Optional upload bundles kept locally
+overleaf/
+overleaf_latest/
+overleaf_upload.zip
+overleaf_latest.zip
